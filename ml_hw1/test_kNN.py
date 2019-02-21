@@ -13,6 +13,7 @@ with open('propublicaTrain.csv', 'r') as f:
     train_samples = np.asarray(train_samples, dtype=np.float64)
     train_labels = train_samples[:, 0]
     train_samples = np.delete(train_samples, 0, 1)
+    train_samples = np.delete(train_samples, 2, 1)
 
 with open('propublicaTest.csv', 'r') as f:
     reader = csv.reader(f)
@@ -24,6 +25,7 @@ with open('propublicaTest.csv', 'r') as f:
     test_samples = np.asarray(test_samples, dtype=np.float64)
     test_labels = test_samples[:, 0]
     test_samples = np.delete(test_samples, 0, 1)
+    test_samples = np.delete(test_samples, 2, 1)
 
 
 def knn_classify(x_train, test_sample, k, k_norm):
@@ -37,7 +39,6 @@ def knn_classify(x_train, test_sample, k, k_norm):
             if distance[i] < distance[neighbor[j]]:
                 neighbor = neighbor[0:j] + [i] + neighbor[j:k - 1]
                 break
-    #print(neighbor)
     positive_count = 0
     negative_count = 0
     for i in range(0, k):
